@@ -12,7 +12,11 @@ angular.module('myNews', [])
 		
 		$scope.addNews = function(){						//A function to add a news
 			if(!$scope.title || $scope.title === '') {return;}		//Preventing user to input empty title
-			$scope.news.push({title : $scope.title, upvotes: 0});	//Now pushing custom news
+			$scope.news.push({
+				title : $scope.title,
+				upvotes: 0,
+				link: $scope.link,
+			});	//Now pushing custom news
 			$scope.title = '';
 		};
 		

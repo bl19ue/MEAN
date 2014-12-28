@@ -7,13 +7,20 @@
 	<body ng-app="myNews" ng-controller="NewsCtrl">
 		<div ng-repeat="n in news | orderBy: '-upvotes'" >		<!-- Loop with orderBy to sort acc to no. of votes -->
 			<span ng-click="increaseVotes(n)">[^]</span>		<!-- A sign to call increaseVotes(a signle vote) -->			
-			{{n.title}} - Votes: {{n.upvotes}}					<!-- Detailed object -->						
+			<a href="{{n.link}}" ng-show="n.link">				<!-- show link if there is a link for the news -->
+				{{n.title}}
+			</a>
+			<span ng-hide="n.link">								<!-- Hide title if there is a link -->
+				{{n.title}}
+			</span>
+			- Votes: {{n.upvotes}}					<!-- Detailed object -->						
 		</div>
 		<form ng-submit="addNews()">
-			<input type="text" ng-model="title">
+			<input type="text" placeholder="Title" ng-model="title">
+			<br>
+			<input type="text" placeholder="Link" ng-model="link">
+			<br>
 			<button type="submit">Add News</button>
-		</form>
-		
-		
+		</form>	
 	</body>
 </html>
