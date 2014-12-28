@@ -8,5 +8,8 @@
 		<div ng-repeat="n in news | orderBy: '-upvotes'" >		<!-- Loop with orderBy to sort acc to no. of votes -->
 			{{n.title}} - Votes: {{n.upvotes}}					<!-- Detailed object -->						
 		</div>
+		
+		<button ng-click="addNews()">Add News</button>			<!-- Add News button using ng-click -->
+		
 	</body>
 </html>
