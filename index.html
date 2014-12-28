@@ -1,26 +1,41 @@
 <html>
 	<head>
 		<title>News</title>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
 		<script src="app.js"></script>
+		<style> .glyphicon-thumbs-up { cursor:pointer } </style>
 	</head>
 	<body ng-app="myNews" ng-controller="NewsCtrl">
-		<div ng-repeat="n in news | orderBy: '-upvotes'" >		<!-- Loop with orderBy to sort acc to no. of votes -->
-			<span ng-click="increaseVotes(n)">[^]</span>		<!-- A sign to call increaseVotes(a signle vote) -->			
-			<a href="{{n.link}}" ng-show="n.link">				<!-- show link if there is a link for the news -->
-				{{n.title}}
-			</a>
-			<span ng-hide="n.link">								<!-- Hide title if there is a link -->
-				{{n.title}}
-			</span>
-			- Votes: {{n.upvotes}}					<!-- Detailed object -->						
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+					<div class="page-header">
+						<h1>N News</h1>
+					</div>
+					<div ng-repeat="n in news | orderBy: '-upvotes'" >		<!-- Loop with orderBy to sort acc to no. of votes -->
+
+						<span class="glyphicon glyphicon-thumbs-up" 
+								  ng-click="increaseVotes(n)"></span>			<!-- A call to increaseVotes(a signle vote) -->								{{n.upvotes}}
+							<span style="font-size:20px; margin-left:10px;">
+								<a href="{{n.link}}" ng-show="n.link">			<!-- show link if there is a link for the news -->
+									{{n.title}}
+								</a>
+							<span ng-hide="n.link">								<!-- Hide title if there is a link -->
+								{{n.title}}
+							</span>				
+						</span>
+					</div>
+					<form ng-submit="addNews()" style="margin-top:30px;">
+						<h3>Add a news</h3>
+						<div class="form-group">
+							<input type="text" placeholder="Title" ng-model="title" class="form-control">
+						</div>
+						<div class="form-group">
+							<input type="text" placeholder="Link" ng-model="link" class="form-control">
+						</div>
+						<button type="submit" class="btn btn-primary">Add News</button>
+					</form>
+			</div>
 		</div>
-		<form ng-submit="addNews()">
-			<input type="text" placeholder="Title" ng-model="title">
-			<br>
-			<input type="text" placeholder="Link" ng-model="link">
-			<br>
-			<button type="submit">Add News</button>
-		</form>	
 	</body>
 </html>
