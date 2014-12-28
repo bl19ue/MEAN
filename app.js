@@ -11,8 +11,13 @@ angular.module('myNews', [])
 		];
 		
 		$scope.addNews = function(){						//A function to add a news
+			if(!$scope.title || $scope.title === '') {return;}		//Preventing user to input empty title
 			$scope.news.push({title : $scope.title, upvotes: 0});	//Now pushing custom news
 			$scope.title = '';
 		};
+		
+		$scope.increaseVotes = function(n){							//As n means a news only so its property upvotes			
+			n.upvotes += 1;											//directly referenced, hence increasing it will 
+		};															//get reflected on the view
 	}
 ]);

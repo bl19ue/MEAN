@@ -6,6 +6,7 @@
 	</head>
 	<body ng-app="myNews" ng-controller="NewsCtrl">
 		<div ng-repeat="n in news | orderBy: '-upvotes'" >		<!-- Loop with orderBy to sort acc to no. of votes -->
+			<span ng-click="increaseVotes(n)">[^]</span>		<!-- A sign to call increaseVotes(a signle vote) -->			
 			{{n.title}} - Votes: {{n.upvotes}}					<!-- Detailed object -->						
 		</div>
 		<form ng-submit="addNews()">
