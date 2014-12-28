@@ -1,16 +1,29 @@
-angular.module('myNews', [])
-	.controller('NewsCtrl', ['$scope', function($scope){
+angular.module('myNews', ['ui.router'])								//Included UI router same as ng-route but better
+
+.config(['$stateProvider', '$urlRouterProvider', 					//After including ui.router, we want to configure it
+		 function($stateProvider, $urlRouterProvider){
+		 	$stateProvider
+			.state('home', {										//Setting up of home route
+					url: '/home',									//Real path URL
+					templateUrl: '/home.html',						//What it will really show 
+					controller: 'NewsCtrl'							//This state will be controlled by NewsCtrl
+				});
+			 $urlRouterProvider.otherwise('home');					//Finally otherwise() is used so that if any other URL is received, it should always go to state 'home'
+		 }])
+
+	.factory('news', [function(){									//A factory to contain all the news and other related stuff
+		//service body
+		var o = {
+			news: [{title: 'hello', link:'', upvotes: 0}]
+		};
+		return o;
+	}])
+
+	.controller('NewsCtrl', ['$scope', 'news', function($scope, news){	//Controller for all the logic
 		$scope.say_hello = "Hey!!!!!!";
+		$scope.news = news.news;									//Binding of news, so that this array can be used outside
 		
-		$scope.news = [										//Additional information
-			 {title : 'News 1', upvotes: 3},
-			 {title : 'News 2', upvotes: 2},
-			 {title : 'News 3', upvotes: 12},
-			 {title : 'News 4', upvotes: 3},
-			 {title : 'News 5', upvotes: 7}
-		];
-		
-		$scope.addNews = function(){						//A function to add a news
+		$scope.addNews = function(){								//A function to add a news
 			if(!$scope.title || $scope.title === '') {return;}		//Preventing user to input empty title
 			$scope.news.push({
 				title : $scope.title,
