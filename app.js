@@ -11,7 +11,8 @@ angular.module('myNews', [])
 		];
 		
 		$scope.addNews = function(){						//A function to add a news
-			$scope.news.push({title : 'A new News!', upvotes: 0});
+			$scope.news.push({title : $scope.title, upvotes: 0});	//Now pushing custom news
+			$scope.title = '';
 		};
 	}
 ]);
